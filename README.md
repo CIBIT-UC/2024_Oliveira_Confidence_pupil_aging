@@ -10,7 +10,7 @@ with code publicly available at https://github.com/colizoli/pupil_belief_states
 
 
 
-Task and acquisition parameters are described in detail in
+Task and acquisition parameters are described in detail in https://estudogeral.uc.pt/handle/10316/110817
 
 
 Analyses scripts run on MATLAB and depend on:
@@ -36,4 +36,4 @@ available here: https://github.com/anne-urai/2017_Urai_pupil-uncertainty/tree/ma
 Raw behavioural and eye tracking data available at Open Science Framework - Ribeiro, M. J. (2024, April 26). Decision confidence and pupil-linked arousal in young and older adults. Retrieved from osf.io/sq3eh
 
 
-For questions, feel free to contact by email mjribeiro@fmed.uc.pt; twitter @Ribeiro_neurosc; 
+For questions, feel free to contact by email mjribeiro@fmed.uc.pt; twitter @Ribeiro_neurosc; bsky @ribeironeuro.bsky.social
