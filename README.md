@@ -10,7 +10,7 @@ with code publicly available at https://github.com/colizoli/pupil_belief_states
 
 
 
-Task and acquisition parameters are described in detail in https://estudogeral.uc.pt/handle/10316/110817
+Task and acquisition parameters are described in detail in https://doi.org/10.1101/2024.05.01.589279 
 
 
 Analyses scripts run on MATLAB and depend on:
