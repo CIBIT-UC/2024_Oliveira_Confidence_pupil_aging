@@ -3,8 +3,8 @@
 clear; close all
 
 % participants id for both sexes
-female = [1, 2, 4, 5, 6, 8, 10, 11, 13, 14, 22, 28, 29, 30, 35, 38, 39, 41];
-male = [3, 7, 9, 12, 15, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 32, 33, 40];
+female = [1, 2, 4, 5, 6, 8, 10, 11, 13, 14, 22, 28, 29, 30, 35, 38, 39, 41, 50, 52, 55, 56];
+male = [3, 7, 9, 12, 15, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 32, 33, 40, 53, 57];
 
 participant_id = [];
 group = [];
@@ -22,13 +22,14 @@ pupil_b4feedback = cell(1, 5);
 [ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
 
 data_dir = 'D:\Project_Exercise_SaraOliveira\Data\PupilData';
+excluded = [24, 26, 34, 37, 51, 54];
 
-for participant = 1:41    
+for participant = setdiff(1:57, excluded)     
     grp = 2; 
-    if participant < 21
+    if participant < 21 || participant == 50
         filename = ['Participant',num2str(participant),'_AllRuns.set'];
         grp = 1; % young group
-    elseif ((participant >= 21 && participant <= 30) || participant == 41) && participant ~= 24
+    elseif ((participant >= 21 && participant <= 30) || participant == 41  || ismember(participant, [52, 53, 55, 56, 57])) && participant ~= 24
         filename = ['Participant',num2str(participant),'_S1_M1_AllRuns.set']; % older participants with mental activity session first
     elseif ((participant >= 31 && participant <= 35) || (participant >= 38 && participant <= 40)) && participant ~= 34
         filename = ['Participant',num2str(participant),'_S2_M1_AllRuns.set']; % older participants with physical activity session first
@@ -142,12 +143,12 @@ table_pupilbeforefeedback = array2table(all_varibl);
 table_pupilbeforefeedback.Properties.VariableNames = {'Participant', 'Group', 'Sex', 'Coherence', 'Confidence', 'Accuracy', 'ReactionTime', 'RT_bin',...
         'Pupil_1', 'Pupil_2', 'Pupil_3', 'Pupil_4', 'Pupil_5'};
 
-filename = 'table_pupilbeforefeedback_500msbins.xlsx';
+filename = 'table_pupilbeforefeedback_500msbins_withoutexclud.xlsx';
 
 writetable(table_pupilbeforefeedback,filename)
 
 %% number of trials in table
-filename = 'table_pupilbeforefeedback_500msbins.xlsx';
+filename = 'table_pupilbeforefeedback_500msbins_withoutexclud.xlsx';
 T = readtable(filename);
 
 

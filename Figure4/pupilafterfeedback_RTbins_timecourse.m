@@ -35,9 +35,9 @@ group = [];
 
 data_dir = 'D:\Project_Exercise_SaraOliveira\Data\PupilData';
 % excluded participants
-excluded = [24, 26, 34, 37];
+excluded = [24, 26, 34, 37, 51, 54];
 
-for participant = setdiff(1:41, excluded)     
+for participant = setdiff(1:57, excluded)     
     
     coherence = [];
     confidence = []; 
@@ -46,10 +46,10 @@ for participant = setdiff(1:41, excluded)
 
     
     grp = 2; 
-    if participant < 21
+    if participant < 21 || participant == 50
         filename = ['Participant',num2str(participant),'_AllRuns.set'];
         grp = 1; % young group
-    elseif ((participant >= 21 && participant <= 30) || participant == 41) && participant ~= 24
+    elseif ((participant >= 21 && participant <= 30) || participant == 41  || ismember(participant, [52, 53, 55, 56, 57])) && participant ~= 24
         filename = ['Participant',num2str(participant),'_S1_M1_AllRuns.set'];
     elseif ((participant >= 31 && participant <= 35) || (participant >= 38 && participant <= 40)) && participant ~= 34
         filename = ['Participant',num2str(participant),'_S2_M1_AllRuns.set'];
@@ -248,9 +248,10 @@ for grp = 1:2
 
 end
 
-% plot horizontal line showing sig effect of confidemce p < .01 -> 1.5 - 3 s
-plot([1.5,3],[-.08 -.08], 'k','color',[0 0 0],'LineWidth',6);
-
+% plot horizontal line showing sig effect of confidence p < .01 -> 1.5 - 3 s
+plot([1.5,3],[-.07 -.07], 'k','color',[0 0 0],'LineWidth',6);
+% plot horizontal line showing sig interaction group x confidence < .01 -> .5-3 s
+plot([2, 2.5],[-.08 -.08], 'k','color',[0.5 0.5 0.5],'LineWidth',6);
 
 hold off;
 box off;
@@ -260,7 +261,7 @@ c = ax.Color;
 ax.FontSize = 26;
 ax.FontName = 'Arial';
 xlim([-.2 3]);
-ylim([-0.1 0.06]);
+ylim([-0.09 0.06]);
 xlabel('Time (s)','FontSize',30,'FontName','Arial'); ylabel('Pupil Response (%)','FontSize',30,'FontName','Arial');
 %     title([group{grp}, ' ADULTS'],'FontSize',30,'FontName','Arial', 'FontWeight', 'normal');
 
@@ -337,7 +338,7 @@ end
 plot([.5, 2.5],[-.08 -.08], 'k','LineWidth',6);
 
 % plot horizontal line showing sig effect of confidence in incorrect trials p < .01 -> 1.5-2 s
-plot([1.5, 2],[-.09 -.09], 'color',[0.5 0.5 0.5],'LineWidth',6);
+plot([1.5, 2.5],[-.09 -.09], 'color',[0.5 0.5 0.5],'LineWidth',6);
 
 hold off;
 box off;

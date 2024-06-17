@@ -1,6 +1,6 @@
 clear; close all;
 
-filename = 'table_reactiontime_MR.xlsx';
+filename = 'table_reactiontime_MR_withoutexcluded.xlsx';
 T = readtable(filename);
 
 
@@ -142,6 +142,21 @@ for grp = 1:2
         end
     end
 end
+
+%%
+
+avg_conf_older = mean(confidence.older.average)
+std_conf_older = std(confidence.older.average)
+
+avg_conf_young = mean(confidence.young.average)
+std_conf_young = std(confidence.young.average)
+
+
+% participants with less than 10 % high confidence trials
+high_confidence_10_older = length(find(confidence.older.average > .90))
+high_confidence_10_older_perc = length(find(confidence.older.average > .90))/length(confidence.older.average)
+
+high_confidence_10_young = length(find(confidence.young.average > .90))
 
 
 %% plot

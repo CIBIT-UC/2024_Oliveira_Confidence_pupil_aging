@@ -4,11 +4,15 @@ clear all; clc;
 behaviour_mat = []; % participant, group, coherence, confidence, accuracy, reaction time
 data_dir = 'D:\Project_Exercise_SaraOliveira\Data';
 
-female = [1, 2, 4, 5, 6, 8, 10, 11, 13, 14, 22, 28, 29, 30, 35, 38, 39, 41];
-male = [3, 7, 9, 12, 15, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 32, 33, 40];
+% participants id for both sexes
+female = [1, 2, 4, 5, 6, 8, 10, 11, 13, 14, 22, 28, 29, 30, 35, 38, 39, 41, 50, 52, 55, 56];
+male = [3, 7, 9, 12, 15, 16, 17, 18, 19, 20, 21, 23, 25, 26, 27, 32, 33, 40, 53, 57];
+
+excluded = [24, 26, 34, 37, 51, 54];
+
 
 % YOUNGER ADULTS
-for p = 1:20
+for p = [1:20, 50]
     session = 1;
     moment = 1;
     if ismember(p, female)
@@ -37,15 +41,14 @@ end
 
 
 % OLDER ADULTS
-for p = 21:41
+for p = setdiff(21:57, excluded)   
     if ismember(p, female)
         sex = 1;
     else
         sex = 2;
     end
     %PARTICIPANTS WHO DID THE MENTAL SESSION FIRST
-    if ((p >= 21 && p <= 30) || p == 41) 
-%         if (p ~= 24)
+    if ((p >= 21 && p <= 30) || p == 41  || ismember(p, [52, 53, 55, 56, 57])) && p ~= 24
         session = 1;
         moment = 1;
         for run = 1:4
@@ -66,8 +69,7 @@ for p = 21:41
 
         end
     %PARTICIPANTS WHO DID THE PHYSICAL SESSION FIRST
-    elseif ((p >= 31 && p <= 35) || (p >= 37 && p <= 40)) 
-%         if (p ~= 34 && p ~= 37)
+    elseif ((p >= 31 && p <= 35) || (p >= 38 && p <= 40)) && p ~= 34
         session = 2;
         moment = 1;
         for run = 1:4
@@ -103,6 +105,6 @@ behaviour_mat(behaviour_mat(:, 7)<.100, 5:8) = NaN;
 table_reactiontime = array2table(behaviour_mat);
 table_reactiontime.Properties.VariableNames = {'Participant', 'Group', 'Sex', 'Coherence', 'Confidence', 'Accuracy', 'ReactionTime', 'RT_bin'};
 
-filename = 'table_reactiontime_MR.xlsx';
+filename = 'table_reactiontime_MR_withoutexcluded.xlsx';
 
 writetable(table_reactiontime,filename)

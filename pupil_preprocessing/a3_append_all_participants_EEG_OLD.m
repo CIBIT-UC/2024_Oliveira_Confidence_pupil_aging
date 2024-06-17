@@ -6,17 +6,24 @@ clear all; clc;
 % edit memory options
 pop_editoptions( 'option_storedisk', 0, 'option_savetwofiles', 0, 'option_saveversion6', 1, 'option_single', 1, 'option_memmapdata', 0, 'option_eegobject', 0, 'option_computeica', 0, 'option_scaleicarms', 1, 'option_rememberfolder', 0, 'option_donotusetoolboxes', 0, 'option_checkversion', 1);
 
-data_dir = 'C:\Users\saraf\OneDrive - Universidade de Coimbra\Ambiente de Trabalho\task_pupil_ecg_v3\Data\PupilData';
+data_dir = 'D:\Project_Exercise_SaraOliveira\Data\PupilData';
 
 % APPEND ALL RUNS FOR EACH PARTICIPANT
-participant = 31;
+for participant = 57%[50, 52, 53, 55, 56]
     %if (participant ~= 23 && participant ~= 31 && participant ~= 36)
-        session = 2;
-            for moment = 1:2
-                filename1 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'1.set'];
-                filename2 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'2.set'];
-                filename3 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'3.set'];
-                filename4 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'4.set'];
+        session = 1;
+            for moment = 1
+                if participant == 52
+                    filename1 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'2.set'];
+                    filename2 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'3.set'];
+                    filename3 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'4.set'];
+                    filename4 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'5.set'];
+                else
+                    filename1 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'1.set'];
+                    filename2 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'2.set'];
+                    filename3 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'3.set'];
+                    filename4 = ['Participant',num2str(participant),'_',num2str(session),num2str(moment),'4.set'];
+                end
                     
                 [ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
                 EEG = pop_loadset('filename',filename1,'filepath',data_dir);
@@ -37,7 +44,7 @@ participant = 31;
                 filename = ['Participant',num2str(participant),'_S', num2str(session),'_M',num2str(moment),'_AllRuns.set'];
                 EEG = pop_saveset( EEG, 'filename',filename,'filepath', data_dir);
             end
-        %end
+end
    % end
 %end
 

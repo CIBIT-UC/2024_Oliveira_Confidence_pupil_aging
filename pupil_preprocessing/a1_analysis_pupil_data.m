@@ -8,20 +8,26 @@ clear; close all;
 
 % Edit memory options
 pop_editoptions( 'option_storedisk', 0, 'option_savetwofiles', 0, 'option_saveversion6', 1, 'option_single', 1, 'option_memmapdata', 0, 'option_eegobject', 0, 'option_computeica', 0, 'option_scaleicarms', 1, 'option_rememberfolder', 0, 'option_donotusetoolboxes', 0, 'option_checkversion', 1);
-
-participant = 31;
+data_dir = 'D:\Project_Exercise_SaraOliveira\Data';
+% Directory to save file
+save_dir = 'D:\Project_Exercise_SaraOliveira\Data\PupilData';
+for participant = 57%[50, 52, 53, 55, 56]
     %if (participant ~= 23 && participant ~= 31 && participant ~= 36)
-       session = 2;
-            for moment = 1:2
-                for run = 1:4
-                    data_dir = 'C:\Users\saraf\OneDrive - Universidade de Coimbra\Ambiente de Trabalho\task_pupil_ecg_v3\Data';
+       session = 1;
+            for moment = 1
+                if participant == 52
+                    runs2include = 2:5;
+                else
+                    runs2include = 1:4;
+                end
+                for run = runs2include
+
                     filename = [data_dir filesep 'Participant',num2str(participant),'_S',num2str(session),'_M',num2str(moment),'_R',num2str(run) filesep 'P',num2str(participant),'_',num2str(session),num2str(moment),num2str(run),'.asc'];
                     
                     % Read in the asc EyeLink file
                     asc = read_eyelink_ascNK_AU(filename);
                     
-                    % Directory to save file
-                    save_dir = 'C:\Users\saraf\OneDrive - Universidade de Coimbra\Ambiente de Trabalho\task_pupil_ecg_v3\Data\PupilData';
+
                     
                     % Create events and data structure, parse asc
                     [data, event, blinksmp, saccsmp] = asc2dat(asc);
@@ -49,7 +55,7 @@ participant = 31;
                     EEG = pop_saveset( EEG, 'filename',filename,'filepath', save_dir);
                 end
            end
-        %end
+end
    %end
 %end
 

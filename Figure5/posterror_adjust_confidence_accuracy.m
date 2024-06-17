@@ -1,6 +1,6 @@
 clear; close all;
 % table created with reactiontime_analysisLMM.m
-filename = 'table_reactiontime_MR.xlsx';
+filename = 'table_reactiontime_MR_withoutexcluded.xlsx';
 T = readtable(filename);
 
 for grp = 1:2
@@ -69,11 +69,16 @@ end
 [H,P,CI] = ttest(RT_posterror_postcorrect{1}(:, 3))
 
 mean(RT_posterror_postcorrect{1}(:, 1))
+std(RT_posterror_postcorrect{1}(:, 1))
+
 mean(RT_posterror_postcorrect{1}(:, 2))
+std(RT_posterror_postcorrect{1}(:, 2))
 
 mean(RT_posterror_postcorrect{2}(:, 1))
-mean(RT_posterror_postcorrect{2}(:, 2))
+std(RT_posterror_postcorrect{2}(:, 1))
 
+mean(RT_posterror_postcorrect{2}(:, 2))
+std(RT_posterror_postcorrect{2}(:, 2))
 
 % post low confidence slowing
 [H,P,CI] = ttest(RT_posthighconf_postlowconf{1}(:, 2), RT_posthighconf_postlowconf{1}(:, 3))
@@ -102,9 +107,12 @@ olderPLCS = RT_posthighconf_postlowconf{2}(:, 4)./RT_posthighconf_postlowconf{2}
 
 % PES
 youngPES = RT_posterror_postcorrect{1}(:, 3)./RT_posterror_postcorrect{1}(:, 2)*100
+mean(youngPES)
+std(youngPES)
 
 olderPES = RT_posterror_postcorrect{2}(:, 3)./RT_posterror_postcorrect{2}(:, 2)*100
-
+mean(olderPES)
+std(olderPES)
 
 [H,P,CI, stats] = ttest2(youngPES, olderPES)
 

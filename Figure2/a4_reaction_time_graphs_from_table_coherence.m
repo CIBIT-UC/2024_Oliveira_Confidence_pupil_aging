@@ -1,6 +1,6 @@
 clear; close all;
 
-filename = 'table_reactiontime_MR.xlsx';
+filename = 'table_reactiontime_MR_withoutexcluded.xlsx';
 T = readtable(filename);
 
 for grp = 1:2

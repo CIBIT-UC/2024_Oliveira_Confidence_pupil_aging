@@ -50,14 +50,14 @@ numbertrials_unsureincorrect = cell(2, 1);
 [ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
 
 data_dir = 'D:\Project_Exercise_SaraOliveira\Data\PupilData';
-excluded = [24, 26, 34, 37];
+excluded = [24, 26, 34, 37, 51, 54];
 
-for participant = setdiff(1:41, excluded)   
+for participant = setdiff(1:57, excluded)   
     grp = 2; 
-    if participant < 21
+    if participant < 21 || participant == 50
         filename = ['Participant',num2str(participant),'_AllRuns.set'];
         grp = 1; % young group
-    elseif ((participant >= 21 && participant <= 30) || participant == 41) && participant ~= 24
+    elseif ((participant >= 21 && participant <= 30) || participant == 41  || ismember(participant, [52, 53, 55, 56, 57])) && participant ~= 24
         filename = ['Participant',num2str(participant),'_S1_M1_AllRuns.set'];
     elseif ((participant >= 31 && participant <= 35) || (participant >= 38 && participant <= 40)) && participant ~= 34
         filename = ['Participant',num2str(participant),'_S2_M1_AllRuns.set'];
@@ -407,8 +407,12 @@ end
 
 % plot horizontal line showing CONFIDENCE ACCURACY INTERACTION p < .01 -> 1-3 s
 plot([.5, 3],[-.02 -.02], 'k','color',[0 0 0],'LineWidth',6);
-% plot horizontal line showing effect of confidence < .01 -> 1-3 s
-plot([.5, 3],[-.04 -.04],'color',[0.5 0.5 0.5],'LineWidth',6);
+
+% plot horizontal line showing group x confidence x accuracy interaction < .01 -> 1.5-2 s
+plot([1.5, 2],[-.04 -.04],'color',[0.5 0.5 0.5],'LineWidth',6);
+
+% % plot horizontal line showing effect of confidence < .01 -> 1-3 s
+% plot([.5, 3],[-.04 -.04],'color',[0.5 0.5 0.5],'LineWidth',6);
 
 
 hold off
@@ -446,6 +450,9 @@ end
 
 % plot horizontal line showing CONFIDENCE ACCURACY INTERACTION p < .01 -> 1-3 s
 plot([.5, 3],[-.02 -.02], 'k','color',[0 0 0],'LineWidth',6);
+
+% plot horizontal line showing group x confidence x accuracy interaction < .01 -> 1.5-2 s
+plot([1.5, 2],[-.04 -.04],'color',[0.5 0.5 0.5],'LineWidth',6);
 
 hold off;
 box off;
@@ -553,7 +560,7 @@ for grp = 1:2
 
 end
 
-% plot horizontal line showing CONFIDENCE ACCURACY INTERACTION p < .01 -> 1-3 s
+% plot horizontal line showing group x coherence x confidence INTERACTION p < .01 -> 2-3 s
 plot([2, 3],[-.02 -.02], 'k','LineWidth',6);
 
 hold off
@@ -588,7 +595,7 @@ for grp = 1:2
 
 end
 
-% plot horizontal line showing groupo coherence confidence p < .01 -> 1-3 s
+% plot horizontal line showing group x coherence x confidence INTERACTION p < .01 -> 2-3 s
 plot([2, 3],[-.02 -.02], 'k','LineWidth',6);
 
 hold off;

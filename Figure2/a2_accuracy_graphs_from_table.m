@@ -1,6 +1,6 @@
 clear; close all;
 
-filename = 'table_reactiontime_MR.xlsx';
+filename = 'table_reactiontime_MR_withoutexcluded.xlsx';
 T = readtable(filename);
 
 
@@ -40,6 +40,8 @@ accuracy.older.men_low_confidence = [];
 accuracy.older.women_high_confidence = [];
 accuracy.older.men_high_confidence = [];
 
+accuracy.young.average = [];
+accuracy.older.average = [];
 
 
 for grp = 1:2
@@ -68,6 +70,8 @@ for grp = 1:2
         
 
         if grp == 1
+            
+            accuracy.young.average = [accuracy.young.average; mean(acc, 'omitnan')];
             
             accuracy.young.per_coherence = [accuracy.young.per_coherence;
                 length(coh1), length(coh2), length(coh3), length(coh4),...
@@ -103,6 +107,7 @@ for grp = 1:2
             
             
         else
+            accuracy.older.average = [accuracy.older.average; mean(acc, 'omitnan')];
             
             accuracy.older.per_coherence = [accuracy.older.per_coherence;
                 length(coh1), length(coh2), length(coh3), length(coh4),...
@@ -137,6 +142,13 @@ for grp = 1:2
         end
     end
 end
+%%
+
+avg_acc_older = mean(accuracy.older.average)
+std_acc_older = std(accuracy.older.average)
+
+avg_acc_young = mean(accuracy.young.average)
+std_acc_young = std(accuracy.young.average)
 
 
 %% plot
